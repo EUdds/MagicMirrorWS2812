@@ -1,0 +1,19 @@
+{
+  "name": "magicmirrorlights",
+  "version": "0.0.1",
+  "description": "Ambient Lighting to my favorite mirror",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EUdds/MagicMirrorWS2812.git"
+  },
+  "author": "Eric Udlis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EUdds/MagicMirrorWS2812/issues"
+  },
+  "homepage": "https://github.com/EUdds/MagicMirrorWS2812#readme"
+}
