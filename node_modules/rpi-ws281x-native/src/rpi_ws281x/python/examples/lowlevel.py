@@ -15,7 +15,7 @@ import _rpi_ws281x as ws
 LED_CHANNEL    = 0
 LED_COUNT      = 16         # How many LEDs to light.
 LED_FREQ_HZ    = 800000     # Frequency of the LED signal.  Should be 800khz or 400khz.
-LED_DMA_NUM    = 5          # DMA channel to use, can be 0-14.
+LED_DMA_NUM    = 10         # DMA channel to use, can be 0-14.
 LED_GPIO       = 18         # GPIO connected to the LED signal line.  Must support PWM!
 LED_BRIGHTNESS = 255        # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = 0          # Set to 1 to invert the LED signal, good if using NPN
@@ -60,8 +60,9 @@ ws.ws2811_t_dmanum_set(leds, LED_DMA_NUM)
 
 # Initialize library with LED configuration.
 resp = ws.ws2811_init(leds)
-if resp != 0:
-	raise RuntimeError('ws2811_init failed with code {0}'.format(resp))
+if resp != ws.WS2811_SUCCESS:
+	message = ws.ws2811_get_return_t_str(resp)
+	raise RuntimeError('ws2811_init failed with code {0} ({1})'.format(resp, message))
 
 # Wrap following code in a try/finally to ensure cleanup functions are called
 # after library is initialized.
@@ -78,8 +79,9 @@ try:
 
 		# Send the LED color data to the hardware.
 		resp = ws.ws2811_render(leds)
-		if resp != 0:
-			raise RuntimeError('ws2811_render failed with code {0}'.format(resp))
+		if resp != ws.WS2811_SUCCESS:
+			message = ws.ws2811_get_return_t_str(resp)
+			raise RuntimeError('ws2811_render failed with code {0} ({1})'.format(resp, message))
 
 		# Delay for a small period of time.
 		time.sleep(0.25)
